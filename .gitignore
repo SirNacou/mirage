@@ -1,0 +1,17 @@
+# Task cache and application build outputs
+.task/
+bin/
+dist/
+node_modules/
+
+
+# Go test/build artifacts
+*.test
+*.out
+
+# Wails configuration and platform files are also ignored by request
+build/
+
+# OS metadata
+.DS_Store
+Thumbs.db
