@@ -7,7 +7,8 @@ import (
 )
 
 type Env struct {
-	PORT int `env:"SERVER_PORT" envDefault:"8080"`
+	PORT        int    `env:"SERVER_PORT" envDefault:"8080"`
+	DatabaseURL string `env:"DATABASE_URL" envDefault:"postgres://mirage:mirage@localhost:5432/mirage?sslmode=disable"`
 }
 
 func LoadEnv() (*Env, error) {

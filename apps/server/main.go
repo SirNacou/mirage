@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/SirNacou/mirage/apps/server/internal/config"
+	"github.com/SirNacou/mirage/apps/server/internal/db"
 	"github.com/danielgtaylor/huma/v2"
 	"github.com/danielgtaylor/huma/v2/adapters/humaecho"
 	"github.com/danielgtaylor/huma/v2/humacli"
@@ -25,6 +26,13 @@ func setup(h humacli.Hooks, o *struct{}) {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	ctx := context.Background()
+	database, err := db.ConnectAndMigrate(ctx, env.DatabaseURL)
+	if err != nil {
+		log.Fatalf("database init failed: %v", err)
+	}
+	defer database.Close()
 
 	router := echo.New()
 	_ = humaecho.New(router, huma.DefaultConfig("Mirage API", "1.0.0"))
