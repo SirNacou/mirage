@@ -1,4 +1,4 @@
-package application
+package app
 
 import (
 	"context"
@@ -8,8 +8,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/SirNacou/mirage/apps/server/internal/db/gen/models"
 	"github.com/SirNacou/mirage/apps/server/internal/domain"
+	"github.com/SirNacou/mirage/apps/server/internal/infra/db/gen/models"
 	"github.com/aarondl/opt/omit"
 	"github.com/stephenafamo/bob"
 	"github.com/stephenafamo/bob/dialect/psql/im"
@@ -28,7 +28,7 @@ type UploadBlockHandler struct {
 
 func NewUploadBlockHandler(exec bob.Executor, dataDir string) (*UploadBlockHandler, error) {
 	blockDir := filepath.Join(dataDir, "blocks")
-	if err := os.MkdirAll(blockDir, 0755); err != nil {
+	if err := os.MkdirAll(blockDir, 0o755); err != nil {
 		return nil, err
 	}
 	return &UploadBlockHandler{exec: exec, blockDir: blockDir}, nil
@@ -42,7 +42,7 @@ func (h *UploadBlockHandler) Handle(ctx context.Context, cmd UploadBlockRequest)
 
 	finalPath := hash.DiskPath(h.blockDir)
 	prefixDir := filepath.Dir(finalPath)
-	if err := os.MkdirAll(prefixDir, 0755); err != nil {
+	if err := os.MkdirAll(prefixDir, 0o755); err != nil {
 		return err
 	}
 

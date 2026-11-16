@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"time"
 
-	models "github.com/SirNacou/mirage/apps/server/internal/db/gen/models"
+	models "github.com/SirNacou/mirage/apps/server/internal/infra/db/gen/models"
 	"github.com/stephenafamo/bob/types"
 )
 

@@ -1,10 +1,10 @@
-package application
+package app
 
 import (
 	"context"
 
-	"github.com/SirNacou/mirage/apps/server/internal/db/gen/models"
 	"github.com/SirNacou/mirage/apps/server/internal/domain"
+	"github.com/SirNacou/mirage/apps/server/internal/infra/db/gen/models"
 	"github.com/stephenafamo/bob"
 )
 
@@ -20,7 +20,10 @@ func NewFindMissingBlocksHandler(exec bob.Executor) *FindMissingBlocksHandler {
 	return &FindMissingBlocksHandler{exec: exec}
 }
 
-func (h *FindMissingBlocksHandler) Handle(ctx context.Context, q FindMissingBlocksQuery) ([]string, error) {
+func (h *FindMissingBlocksHandler) Handle(
+	ctx context.Context,
+	q FindMissingBlocksQuery,
+) ([]string, error) {
 	if len(q.RawHashes) == 0 {
 		return []string{}, nil
 	}

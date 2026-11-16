@@ -1,10 +1,10 @@
-package application
+package app
 
 import (
 	"context"
 	"encoding/json"
 
-	"github.com/SirNacou/mirage/apps/server/internal/db/gen/models"
+	"github.com/SirNacou/mirage/apps/server/internal/infra/db/gen/models"
 	"github.com/SirNacou/mirage/apps/server/internal/domain"
 	"github.com/SirNacou/mirage/packages/sync-core/chunker"
 	"github.com/aarondl/opt/omit"

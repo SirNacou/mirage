@@ -13,23 +13,23 @@ plugins:
   dbinfo:
     disabled: false
     pkgname: "dbinfo"
-    destination: "internal/db/gen/dbinfo"
+    destination: "internal/infra/db/gen/dbinfo"
   enums:
     disabled: false
     pkgname: "enums"
-    destination: "internal/db/gen/enums"
+    destination: "internal/infra/db/gen/enums"
   models:
     disabled: false
     pkgname: "models"
-    destination: "internal/db/gen/models"
+    destination: "internal/infra/db/gen/models"
   factory:
     disabled: false
     pkgname: "factory"
-    destination: "internal/db/gen/factory"
+    destination: "internal/infra/db/gen/factory"
   dberrors:
     disabled: false
     pkgname: "dberrors"
-    destination: "internal/db/gen/dberrors"
+    destination: "internal/infra/db/gen/dberrors"
   where:
     disabled: false
   loaders:

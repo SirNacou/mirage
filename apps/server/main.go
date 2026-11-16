@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/SirNacou/mirage/apps/server/internal/config"
-	"github.com/SirNacou/mirage/apps/server/internal/db"
+	"github.com/SirNacou/mirage/apps/server/internal/infra/config"
+	"github.com/SirNacou/mirage/apps/server/internal/infra/db"
 	"github.com/danielgtaylor/huma/v2"
 	"github.com/danielgtaylor/huma/v2/adapters/humaecho"
 	"github.com/danielgtaylor/huma/v2/humacli"

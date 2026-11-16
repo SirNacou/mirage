@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	models "github.com/SirNacou/mirage/apps/server/internal/db/gen/models"
+	models "github.com/SirNacou/mirage/apps/server/internal/infra/db/gen/models"
 	"github.com/aarondl/opt/omit"
 	"github.com/jaswdr/faker/v2"
 	"github.com/stephenafamo/bob"

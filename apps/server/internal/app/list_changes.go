@@ -1,10 +1,10 @@
-package application
+package app
 
 import (
 	"context"
 	"encoding/json"
 
-	"github.com/SirNacou/mirage/apps/server/internal/db/gen/models"
+	"github.com/SirNacou/mirage/apps/server/internal/infra/db/gen/models"
 	"github.com/SirNacou/mirage/packages/sync-core/protocol"
 	"github.com/stephenafamo/bob"
 	"github.com/stephenafamo/bob/dialect/psql/sm"
