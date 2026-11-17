@@ -8,21 +8,21 @@ import (
 	"github.com/stephenafamo/bob"
 )
 
-type FindMissingBlocksQuery struct {
+type CheckBlocksQuery struct {
 	RawHashes []string
 }
 
-type FindMissingBlocksHandler struct {
+type CheckBlocksHandler struct {
 	exec bob.Executor
 }
 
-func NewFindMissingBlocksHandler(exec bob.Executor) *FindMissingBlocksHandler {
-	return &FindMissingBlocksHandler{exec: exec}
+func NewCheckBlocksHandler(exec bob.Executor) *CheckBlocksHandler {
+	return &CheckBlocksHandler{exec: exec}
 }
 
-func (h *FindMissingBlocksHandler) Handle(
+func (h *CheckBlocksHandler) Handle(
 	ctx context.Context,
-	q FindMissingBlocksQuery,
+	q CheckBlocksQuery,
 ) ([]string, error) {
 	if len(q.RawHashes) == 0 {
 		return []string{}, nil

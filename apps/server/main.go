@@ -1,4 +1,4 @@
-package server
+package main
 
 import (
 	"context"
@@ -7,12 +7,10 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/SirNacou/mirage/apps/server/internal/api"
 	"github.com/SirNacou/mirage/apps/server/internal/infra/config"
 	"github.com/SirNacou/mirage/apps/server/internal/infra/db"
-	"github.com/danielgtaylor/huma/v2"
-	"github.com/danielgtaylor/huma/v2/adapters/humaecho"
 	"github.com/danielgtaylor/huma/v2/humacli"
-	"github.com/labstack/echo/v5"
 )
 
 func main() {
@@ -32,10 +30,12 @@ func setup(h humacli.Hooks, o *struct{}) {
 	if err != nil {
 		log.Fatalf("database init failed: %v", err)
 	}
-	defer database.Close()
 
-	router := echo.New()
-	_ = humaecho.New(router, huma.DefaultConfig("Mirage API", "1.0.0"))
+	router, err := api.NewRouter(database.Exec, env.DataDir)
+	if err != nil {
+		database.Close()
+		log.Fatalf("api initialization failed: %v", err)
+	}
 
 	server := http.Server{
 		Addr:    fmt.Sprintf(":%d", env.PORT),
@@ -43,9 +43,11 @@ func setup(h humacli.Hooks, o *struct{}) {
 	}
 
 	h.OnStart(func() {
-		if err := server.ListenAndServe(); err != nil {
-			log.Fatalf("error when starting server: %v", err)
-		}
+		go func() {
+			if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+				log.Printf("error when starting server: %v", err)
+			}
+		}()
 	})
 
 	h.OnStop(func() {
@@ -55,5 +57,6 @@ func setup(h humacli.Hooks, o *struct{}) {
 		if err := server.Shutdown(ctx); err != nil {
 			log.Fatalf("error when shutting down server: %v", err)
 		}
+		database.Close()
 	})
 }
