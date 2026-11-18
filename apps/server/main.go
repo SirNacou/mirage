@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
 	"time"
 
@@ -43,11 +44,10 @@ func setup(h humacli.Hooks, o *struct{}) {
 	}
 
 	h.OnStart(func() {
-		go func() {
-			if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-				log.Printf("error when starting server: %v", err)
-			}
-		}()
+		slog.Info("server is running", slog.Int("port", env.PORT))
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Printf("error when starting server: %v", err)
+		}
 	})
 
 	h.OnStop(func() {
