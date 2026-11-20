@@ -1,0 +1,65 @@
+package app
+
+import (
+	"context"
+
+	"github.com/SirNacou/mirage/apps/server/internal/domain"
+	"github.com/SirNacou/mirage/apps/server/internal/infra/db/gen/models"
+	"github.com/stephenafamo/bob"
+)
+
+type CheckBlocksQuery struct {
+	RawHashes []string
+}
+
+type CheckBlocksHandler struct {
+	exec bob.Executor
+}
+
+func NewCheckBlocksHandler(exec bob.Executor) *CheckBlocksHandler {
+	return &CheckBlocksHandler{exec: exec}
+}
+
+func (h *CheckBlocksHandler) Handle(
+	ctx context.Context,
+	q CheckBlocksQuery,
+) ([]string, error) {
+	if len(q.RawHashes) == 0 {
+		return []string{}, nil
+	}
+
+	// Validate and deduplicate input hashes
+	seen := make(map[string]struct{}, len(q.RawHashes))
+	validHashes := make([]string, 0, len(q.RawHashes))
+	for _, raw := range q.RawHashes {
+		parsed, err := domain.ParseBlockHash(raw)
+		if err != nil {
+			return nil, err
+		}
+		s := parsed.String()
+		if _, exists := seen[s]; !exists {
+			seen[s] = struct{}{}
+			validHashes = append(validHashes, s)
+		}
+	}
+
+	existingRows, err := models.Chunks.Query(
+		models.SelectWhere.Chunks.Hash.In(validHashes...),
+	).All(ctx, h.exec)
+	if err != nil {
+		return nil, err
+	}
+
+	existing := make(map[string]struct{}, len(existingRows))
+	for _, row := range existingRows {
+		existing[row.Hash] = struct{}{}
+	}
+
+	missing := make([]string, 0)
+	for _, hStr := range validHashes {
+		if _, ok := existing[hStr]; !ok {
+			missing = append(missing, hStr)
+		}
+	}
+	return missing, nil
+}

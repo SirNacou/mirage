@@ -1,34 +1,34 @@
 {
   "features": {
     "ghcr.io/devcontainers-extra/features/bun:1": {
-      "integrity": "sha256:0624284ecaead9dd4c6654616a7f939cfa4ebcbc60593700a74e35b1767befa5",
+      "version": "1.1.0",
       "resolved": "ghcr.io/devcontainers-extra/features/bun@sha256:0624284ecaead9dd4c6654616a7f939cfa4ebcbc60593700a74e35b1767befa5",
-      "version": "1.1.0"
+      "integrity": "sha256:0624284ecaead9dd4c6654616a7f939cfa4ebcbc60593700a74e35b1767befa5"
     },
     "ghcr.io/devcontainers/features/docker-in-docker:4.1.3": {
-      "integrity": "sha256:fae40f3c8be5a7c3b0db344c1d30341bc2c91ba38d1d5b14cd2ad72e6d65d084",
+      "version": "4.1.3",
       "resolved": "ghcr.io/devcontainers/features/docker-in-docker@sha256:fae40f3c8be5a7c3b0db344c1d30341bc2c91ba38d1d5b14cd2ad72e6d65d084",
-      "version": "4.1.3"
+      "integrity": "sha256:fae40f3c8be5a7c3b0db344c1d30341bc2c91ba38d1d5b14cd2ad72e6d65d084"
     },
     "ghcr.io/devcontainers/features/node:2": {
-      "integrity": "sha256:20ac718cc67e7999a9d3fbb8387f1a3a5d53ecbd41fe7c075ebadb8e9b431b17",
+      "version": "2.1.2",
       "resolved": "ghcr.io/devcontainers/features/node@sha256:20ac718cc67e7999a9d3fbb8387f1a3a5d53ecbd41fe7c075ebadb8e9b431b17",
-      "version": "2.1.2"
+      "integrity": "sha256:20ac718cc67e7999a9d3fbb8387f1a3a5d53ecbd41fe7c075ebadb8e9b431b17"
     },
     "ghcr.io/eitsupi/devcontainer-features/go-task:1": {
-      "integrity": "sha256:8a6c4b4f9d7559f32400da0c11d1bb11e59732f47f7db5defca68e7712544d13",
+      "version": "1.0.4",
       "resolved": "ghcr.io/eitsupi/devcontainer-features/go-task@sha256:8a6c4b4f9d7559f32400da0c11d1bb11e59732f47f7db5defca68e7712544d13",
-      "version": "1.0.4"
+      "integrity": "sha256:8a6c4b4f9d7559f32400da0c11d1bb11e59732f47f7db5defca68e7712544d13"
     },
     "ghcr.io/nlstn/devcontainer-features/go-air:1": {
-      "integrity": "sha256:6b9d2c00228c208b11fc726a5f73cbc8837668ce7a7bb837d849e8759eea8764",
+      "version": "1.0.0",
       "resolved": "ghcr.io/nlstn/devcontainer-features/go-air@sha256:6b9d2c00228c208b11fc726a5f73cbc8837668ce7a7bb837d849e8759eea8764",
-      "version": "1.0.0"
+      "integrity": "sha256:6b9d2c00228c208b11fc726a5f73cbc8837668ce7a7bb837d849e8759eea8764"
     },
     "ghcr.io/rafaph/devcontainer-features/goose-cli:1": {
-      "integrity": "sha256:a49fa4ddecdded8e19f23aaf7ef49613a0e4ce0cd8be208045db3742cd5e1fe5",
+      "version": "1.0.0",
       "resolved": "ghcr.io/rafaph/devcontainer-features/goose-cli@sha256:a49fa4ddecdded8e19f23aaf7ef49613a0e4ce0cd8be208045db3742cd5e1fe5",
-      "version": "1.0.0"
+      "integrity": "sha256:a49fa4ddecdded8e19f23aaf7ef49613a0e4ce0cd8be208045db3742cd5e1fe5"
     }
   }
 }

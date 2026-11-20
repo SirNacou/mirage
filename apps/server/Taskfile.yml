@@ -1,0 +1,48 @@
+version: "3"
+
+vars:
+  DB_DIR: internal/db/migrations
+  DATABASE_URL: '{{.DATABASE_URL | default "postgres://mirage:mirage@localhost:5432/mirage?sslmode=disable"}}'
+  BOB_CONFIG: bobgen.yml
+
+tasks:
+  goose:create:
+    desc: "Create a new SQL migration file (Usage: task goose:create NAME=init_sync_schema)"
+    interactive: true
+    requires:
+      vars:
+        - name: NAME
+    cmds:
+      - goose -dir {{.DB_DIR}} create {{.NAME}} sql
+
+  goose:up:
+    desc: Apply all pending migrations to PostgreSQL
+    cmds:
+      - goose -dir {{.DB_DIR}} postgres "{{.DATABASE_URL}}" up
+
+  goose:down:
+    desc: Roll back a single migration
+    cmds:
+      - goose -dir {{.DB_DIR}} postgres "{{.DATABASE_URL}}" down
+
+  goose:status:
+    desc: Check the status of all migrations
+    cmds:
+      - goose -dir {{.DB_DIR}} postgres "{{.DATABASE_URL}}" status
+
+  goose:reset:
+    desc: Roll back all migrations
+    cmds:
+      - goose -dir {{.DB_DIR}} postgres "{{.DATABASE_URL}}" reset
+
+  bob:gen:
+    desc: Generate type-safe Bob ORM models from the live PostgreSQL schema
+    cmds:
+      - PSQL_DSN="{{.DATABASE_URL}}" bobgen-psql -c {{.BOB_CONFIG}}
+      - go mod tidy
+
+  db:sync:
+    desc: Run pending Goose migrations and immediately regenerate Bob models
+    cmds:
+      - task: goose:up
+      - task: bob:gen
